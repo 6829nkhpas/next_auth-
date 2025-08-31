@@ -9,10 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@types/mongoose": "^5.11.96",
     "axios": "^1.11.0",
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
-    "mongose": "^0.0.2-security",
+    "mongoose": "^8.18.0",
     "next": "15.5.2",
     "nodemailer": "^7.0.6",
     "react": "19.1.0",
