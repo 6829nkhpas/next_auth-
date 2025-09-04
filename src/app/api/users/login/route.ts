@@ -2,7 +2,7 @@ import {connect} from '@/dbconfig/config';
 import User from '@/models/userModel';
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import Link from 'next/link';
+
 import jwt from 'jsonwebtoken';
  connect();
 export async function POST(request: NextRequest){
@@ -15,10 +15,12 @@ export async function POST(request: NextRequest){
         }
         const validPassword = await bcrypt.compare(password, user.password);
         if(!validPassword){
-            return NextResponse.json({error: 'Invalid password'}, {status: 400});
+            return NextResponse.json({error: 'Invalid Password'}, {status: 400});
         }
         const token = await jwt.sign({id: user._id, email: user.email}, process.env.TOKEN_SECRET!, {expiresIn: '1d'});
-        return NextResponse.json({message: 'Login successful'}, {status: 200});
+        const response = NextResponse.json({message: 'Login successful'}, {status: 200});
+        response.cookies.set('token', token, {httpOnly: true});
+        return response;
     } catch (error) {
         return NextResponse.json({error: error}, {status: 500});
     }
