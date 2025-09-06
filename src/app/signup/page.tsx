@@ -36,9 +36,18 @@ export default function Signup() {
       toast.success("Signup successful");
       router.push("/login");
     } catch (error: unknown) {
-    
       console.log("error in signup", error);
-      return toast.error(error.message);
+      
+      let errorMessage = "An unexpected error occurred";
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as { response: { data: { error: string } } };
+        errorMessage = axiosError.response?.data?.error || "Signup failed";
+      }
+      
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
