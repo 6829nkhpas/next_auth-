@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
     }
   });
         const mailOptions = {
-            from: "noreply@example.com",
+            from: "naman@kanika.com",
             to: email,
             subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
             text: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
