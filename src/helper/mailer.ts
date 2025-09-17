@@ -26,11 +26,11 @@ const transporter = nodemailer.createTransport({
     }
   });
         const mailOptions = {
-            from: "naman@kanika.com",
+            from: "naman@gmail.com",
             to: email,
             subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
             text: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-            html: emailType === "VERIFY" ? `<p>Click <a href="${process.env.NEXT_PUBLIC_APP_URL}/verifyemail?token=${hashedToken}">here</a> to verify your email</p>` : `<p>Click <a href="${process.env.NEXT_PUBLIC_APP_URL}/resetpassword?token=${hashedToken}">here</a> to reset your password</p>`,
+            html: emailType === "VERIFY" ? `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to verify your email</p>` : `<p>Click <a href="${process.env.DOMAIN}/resetpassword?token=${hashedToken}">here</a> to reset your password</p>`,
         }
         await transporter.sendMail(mailOptions);
         return NextResponse.json({message: "Email sent successfully", success: true}, {status: 200});
